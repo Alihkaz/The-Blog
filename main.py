@@ -9,16 +9,21 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-# Optional: add contact me email functionality (Day 60)
-# import smtplib
 
+
+# Optional: add contact me email functionality 
+# import smtplib
+#4. If you are using a working contact form, then make sure you get your email and password via an environment variable as well.
+import os
+#FLASK_KEY" is the name of your environment variable.
+# so Flask key is a variable that is equal to the actaul password , so instead of typing the password , we put the variable , and then acess the password just on our pc through the os library ! 
 
 
 
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY') 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -43,7 +48,7 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ.get("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
 db.init_app(app)
 
