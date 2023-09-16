@@ -9,12 +9,12 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
-
-
-# Optional: add contact me email functionality 
 # import smtplib
+
+
+
 #4. If you are using a working contact form, then make sure you get your email and password via an environment variable as well.
-import os
+# import os
 #FLASK_KEY" is the name of your environment variable.
 # so Flask key is a variable that is equal to the actaul password , so instead of typing the password , we put the variable , and then acess the password just on our pc through the os library ! 
 
@@ -264,33 +264,30 @@ def about():
     return render_template("about.html", current_user=current_user)
 
 
-@app.route("/contact", methods=["GET", "POST"])
-def contact():
-    return render_template("contact.html", current_user=current_user)
-
-# Optional: You can inclue the email sending code from Day 60:
-# DON'T put your email and password here directly! The code will be visible when you upload to Github.
-# Use environment variables instead (Day 35)
-
-# MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
-# MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
+# # DON'T put your email and password here directly! The code will be visible when you upload to Github.
+# # Use environment variables instead 
 
 # @app.route("/contact", methods=["GET", "POST"])
 # def contact():
-#     if request.method == "POST":
+    
+#     # UPDATE: This feature is no longer supported as of May 30th, 2022. See
+#     # if request.method == "POST":
+
+#     #     MAIL_ADDRESS = os.environ.get("EMAIL_KEY")
+#     #     MAIL_APP_PW = os.environ.get("PASSWORD_KEY")
+
+#     #     def send_email(name, email, phone, message):
+#     #         email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
+#     #         with smtplib.SMTP("smtp.gmail.com" ,587) as connection:
+#     #             connection.starttls()
+#     #             connection.login(MAIL_ADDRESS, MAIL_APP_PW)
+#     #             connection.sendmail(MAIL_ADDRESS, MAIL_APP_PW, email_message)
 #         data = request.form
 #         send_email(data["name"], data["email"], data["phone"], data["message"])
-#         return render_template("contact.html", msg_sent=True)
-#     return render_template("contact.html", msg_sent=False)
-#
-#
-# def send_email(name, email, phone, message):
-#     email_message = f"Subject:New Message\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage:{message}"
-#     with smtplib.SMTP("smtp.gmail.com") as connection:
-#         connection.starttls()
-#         connection.login(MAIL_ADDRESS, MAIL_APP_PW)
-#         connection.sendmail(MAIL_ADDRESS, MAIL_APP_PW, email_message)
+#          return render_template("contact.html", msg_sent=True)
+    
 
+    # return render_template("contact.html", msg_sent=False)
 
 if __name__ == "__main__":
     app.run(debug=False, port=5001)
